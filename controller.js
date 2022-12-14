@@ -12,7 +12,19 @@ exports.index = function (req, res) {
 exports.tampilsemuamahasiswa = function (req, res) {
   connection.query("SELECT * FROM mahasiswa", function (error, rows, fileds) {
     if (error) {
-      connection.log(error);
+      console.log(error);
+    } else {
+      response.ok(rows, res);
+    }
+  });
+};
+
+// Menampilkan semua data mahasiswa berdasarkan ID
+exports.tampilberdasarkanid = function (req, res) {
+  let id = req.params.id;
+  connection.query("SELECT * FROM mahasiswa WHERE id_mahasiswa = ?", [id], function (error, rows, fields) {
+    if (error) {
+      console.log(error);
     } else {
       response.ok(rows, res);
     }
